@@ -1,0 +1,46 @@
+
+public class PrimeCounter {
+	private int numPrimes=0;
+	public int countPrimes(int limit){
+		double sqrtLimit=Math.sqrt(limit);
+		boolean[] primes=new boolean[limit];
+		for(int i=0; i<limit; i++){
+			primes[i]=true;
+		}
+		primes[0]=false;
+		for(int i=3; i<limit; i+=2){
+			primes[i]=false;
+		}
+		for(int i=2; i<sqrtLimit; i+=2){
+			if(primes[i]==true){
+				numPrimes++;
+				for(int j=((i+1)*(i+1)-1); j<limit; j+=(i+1)*2){
+					primes[j]=false;
+				}
+			}
+		}
+		for(int i=(int) sqrtLimit; i<primes.length; i++){
+			if(primes[i]==true)
+				numPrimes++;
+		}
+		return numPrimes;
+	}
+
+	public static void main(String[] args) {
+		PrimeCounter a=new PrimeCounter();
+		long b=System.currentTimeMillis();
+		System.out.println(a.countPrimes(100000000)+ " prime numbers");
+		long c=System.currentTimeMillis();
+		System.out.println(c-b + " milliseconds");
+		//		long d=System.currentTimeMillis();
+		//		System.out.println(a.countPrimes(10000)+ " prime numbers");
+		//		long e=System.currentTimeMillis();
+		//		System.out.println(e-d + " milliseconds");
+		//		long f=System.currentTimeMillis();
+		//		System.out.println(a.countPrimes(100000)+ " prime numbers");
+		//		long g=System.currentTimeMillis();
+		//		System.out.println(g-f + " milliseconds");
+
+	}
+
+}
